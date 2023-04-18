@@ -18,9 +18,10 @@
                     }
                     ?>
                 </div>
-                <input name="username" type="text" placeholder="username">
+                <input name="email" type="text" placeholder="email@email.com">
                 <input name="password" type="password" placeholder="password">
                 <button class="login-button" type="submit">Login</button>
+
             </form>
         </div>
     </div>
