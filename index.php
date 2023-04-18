@@ -12,6 +12,8 @@ Routing::get('workers', 'DefaultController');
 Routing::get('manager_settings', 'DefaultController');
 Routing::get('reports', 'DefaultController');
 
+Routing::post('login', 'SecurityController');
+
 Routing::run($path);
 
 ?>
