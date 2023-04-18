@@ -22,5 +22,3 @@ class Routing {
         $object->$action();
     }
 }
-
-?>

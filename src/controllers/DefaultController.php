@@ -5,22 +5,22 @@ require_once 'AppController.php';
 class DefaultController extends AppController{
 
     public function index() {
-        // TODO display login.html
+        // TODO display login.php
         $this->render('login');
     }
 
     public function time() {
-        // TODO display time.html
+        // TODO display time.php
         $this->render('time');
     }
 
     public function worker_settings() {
-        // TODO display worker_settings.html
+        // TODO display worker_settings.php
         $this->render('worker_settings');
     }
 
     public function workers() {
-        //TODO display workers.html
+        //TODO display workers.php
         $this->render('workers');
     }
 
@@ -30,9 +30,7 @@ class DefaultController extends AppController{
     }
 
     public function reports() {
-        // TODO display reports.html
+        // TODO display reports.php
         $this->render('reports');
     }
 }
-
-?>

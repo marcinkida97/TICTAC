@@ -10,6 +10,14 @@
         </div>
         <div class="login-container">
             <form>
+                <div class="message">
+                    <?php if(isset($messages)) {
+                        foreach($messages as $message) {
+                            echo $message;
+                        }
+                    }
+                    ?>
+                </div>
                 <input name="username" type="text" placeholder="username">
                 <input name="password" type="password" placeholder="password">
                 <button class="login-button">Login</button>
