@@ -1,7 +1,5 @@
 <?php
 
-//print("Hello world!")
-
 require 'Routing.php';
 
 $path = trim($_SERVER['REQUEST_URI'], '/');
