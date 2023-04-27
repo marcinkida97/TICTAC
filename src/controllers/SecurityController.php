@@ -11,9 +11,10 @@ class SecurityController extends AppController
     {
         $user = new User(email: 'jsnow@pk.edu.pl', password: 'admin', name: 'John', surname: 'Snow');
 
-        if ($this->isPost()) {
-            return $this->login('login');
-        }
+        //TODO sprawdzić czemu ten kawałek kodu nie działa!
+        //if ($this->isPost()) {
+        //    return $this->login('login');
+        //}
 
         $email = $_POST["email"];
         $password = $_POST["password"];
@@ -26,9 +27,10 @@ class SecurityController extends AppController
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
-        #return $this->render('time');
+        return $this->render('time');
 
         $url = "http://$_SERVER[HTTP_HOST]";
+        //TODO przekierowanie do odpowiedniej lokacji. W przypadku jak jest pracownik to ma iść do time a jak manager to do workers!!
         header("Location: {$url}/time");
     }
 }
