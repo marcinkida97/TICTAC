@@ -27,12 +27,16 @@
             <section class="main-section">
                 <div class="time-input">
                     <h2>Enter time</h2>
-                    <h3>Date</h3>
-                    <input name="date-time" type="date">
                     <h3>Start time</h3>
-                    <input name="start-time" type="time">
+                    <input name="start-time" type="datetime-local">
                     <h3>End time</h3>
-                    <input name="end-time" type="time">
+                    <input name="end-time" type="datetime-local">
+                    <h3>Workplace</h3>
+                    <select id="workplaces" name="workplaces">
+                        <option value="1">Opcja 1</option>
+                        <option value="2">Opcja 2</option>
+                        <option value="3">Opcja 3</option>
+                    </select>
                     <button class="submit-button">Submit</button>
                 </div>
                 <div class="side-bar">
