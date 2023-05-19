@@ -61,5 +61,25 @@ class User
         $this->surname = $surname;
     }
 
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): void
+    {
+        $this->role = $role;
+    }
+
+    public function getCompany(): string
+    {
+        return $this->company;
+    }
+
+    public function setCompany(string $company): void
+    {
+        $this->company = $company;
+    }
+
 
 }
