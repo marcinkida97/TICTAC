@@ -20,12 +20,6 @@ class DefaultController extends AppController{
         $this->render('worker_settings', ['user' => $user]);
     }
 
-    public function workers() {
-        session_start();
-        $user = $_SESSION['user'];
-        $this->render('workers', ['user' => $user]);
-    }
-
     public function manager_settings() {
         session_start();
         $user = $_SESSION['user'];

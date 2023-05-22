@@ -35,20 +35,13 @@
                     <div class="workers-list">
                         <table>
                             <tr>
-                                <td><input type="checkbox"></td><td><h3>Name</h3></td><td><h3>Position</h3></td>
+                                <td><input type="checkbox"></td><td><h3>ID</h3></td><td><h3>Name</h3></td><td><h3>Surname</h3></td><td><h3>Role</h3></td><td><h3>Company</h3></td>
                             </tr>
+                            <?php foreach ($workers as $worker): ?>
                             <tr>
-                                <td><input type="checkbox"></td><td>Jack Sparrow</td><td>Manager</td>
+                                <td><input type="checkbox"></td><td><?= $worker->getId(); ?></td><td><?= $worker->getName(); ?></td><td><?= $worker->getSurname(); ?></td><td><?= $worker->getRole(); ?></td><td><?= $worker->getCompany(); ?></td>
                             </tr>
-                            <tr>
-                                <td><input type="checkbox"></td><td>John Snow</td><td>Bartender</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td><td>Kriss Kowalsky</td><td>Bartender</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td><td>Karine Rodrigue</td><td>Waiter</td>
-                            </tr>
+                            <?php endforeach; ?>
                         </table>
                     </div>
                     <div class="workplaces-list">

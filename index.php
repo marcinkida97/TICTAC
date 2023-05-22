@@ -8,7 +8,7 @@ $path = parse_url($path, PHP_URL_PATH);
 Routing::get('', 'DefaultController');
 Routing::get('time', 'DefaultController');
 Routing::get('worker_settings', 'DefaultController');
-Routing::get('workers', 'DefaultController');
+Routing::get('workers', 'WorkersController');
 Routing::get('manager_settings', 'DefaultController');
 Routing::get('reports', 'DefaultController');
 
