@@ -9,7 +9,10 @@
             <img src="public/img/logo.svg">
         </div>
         <div class="login-container">
-            <form action="login" method="POST">
+            <form id="login-form" action="login" method="POST">
+                <input name="email" type="text" placeholder="email@email.com">
+                <input name="password" type="password" placeholder="password">
+                <button class="login-button" type="submit">Login</button>
                 <div class="message">
                     <?php if(isset($messages)) {
                         foreach($messages as $message) {
@@ -18,10 +21,6 @@
                     }
                     ?>
                 </div>
-                <input name="email" type="text" placeholder="email@email.com">
-                <input name="password" type="password" placeholder="password">
-                <button class="login-button" type="submit">Login</button>
-
             </form>
         </div>
     </div>

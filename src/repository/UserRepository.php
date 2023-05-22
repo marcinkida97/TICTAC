@@ -16,11 +16,12 @@ class UserRepository extends Repository
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user == false) {
+        if (!$user) {
             return null;
         }
 
         return new User(
+            $user['user_id'],
             $user['email'],
             $user['password'],
             $user['name'],

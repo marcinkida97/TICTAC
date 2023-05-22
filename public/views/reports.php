@@ -13,13 +13,18 @@
                 <li><a href="workers" class="button">Workers</a></li>
                 <li><a href="manager_settings" class="button">Settings</a></li>
                 <li><a href="reports" class="button">Reports</a></li>
-                <li><a href="index" class="button">Logout</a></li>
+                <li><a href="/" class="button">Logout</a></li>
             </ul>
         </nav>
         <main>
             <header>
                 <div class="user-data">
-                    Manager data
+                    <?php if(isset($user)) {
+                        echo $user->getName() . " " . $user->getSurname() . "<br>";
+                        echo $user->getRole() . "<br>";
+                        echo $user->getCompany();
+                    }
+                    ?>
                 </div>
                 <div class="page-name">
                     <h1>Reports</h1>

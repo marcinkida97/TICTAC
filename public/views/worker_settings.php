@@ -12,13 +12,18 @@
             <ul>
                 <li><a href="time" class="button">Time</a></li>
                 <li><a href="worker_settings" class="button">Settings</a></li>
-                <li><a href="index" class="button">Logout</a></li>
+                <li><a href="/" class="button">Logout</a></li>
             </ul>
         </nav>
         <main>
             <header>
                 <div class="user-data">
-                    User data
+                    <?php if(isset($user)) {
+                        echo $user->getName() . " " . $user->getSurname() . "<br>";
+                        echo $user->getRole() . "<br>";
+                        echo $user->getCompany();
+                    }
+                    ?>
                 </div>
                 <div class="page-name">
                     <h1>Settings</h1>

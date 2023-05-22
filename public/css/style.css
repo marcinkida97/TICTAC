@@ -30,7 +30,7 @@ img {
     margin: 1%;
 }
 
-form {
+.login-container #login-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -81,7 +81,7 @@ input {
         width: 100%;
     }
 
-    form {
+    .login-form {
         width: 80%;
         margin: auto;
     }
@@ -192,7 +192,14 @@ h3 {
     margin: 0;
 }
 
-.time-input > input {
+.time-input #time-input-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.time-input #time-input-form input {
     color: #FFFFFF;
     font-size: 1em;
     max-width: 15em;

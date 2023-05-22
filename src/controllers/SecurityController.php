@@ -33,15 +33,16 @@ class SecurityController extends AppController
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
+        session_start();
+        $_SESSION['user'] = $user;
+
         $url = "http://$_SERVER[HTTP_HOST]";
-        //TODO przekierowanie do odpowiedniej lokacji. W przypadku jak jest pracownik to ma iść do time a jak manager to do workers!!
+
         if ($user->getRole() == 'worker') {
-            header("Location: {$url}/time");
-            return $this->render('time');
+            return $this->render('time', ['user' => $user]);
         }
         if ($user->getRole() == 'manager') {
-            header("Location: {$url}/workers");
-            return $this->render('workers');
+            return $this->render('workers', ['user' => $user]);
         }
     }
 }

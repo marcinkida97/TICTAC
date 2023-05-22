@@ -5,32 +5,36 @@ require_once 'AppController.php';
 class DefaultController extends AppController{
 
     public function index() {
-        // TODO display login.php
         $this->render('login');
     }
 
     public function time() {
-        // TODO display time.php
-        $this->render('time');
+        session_start();
+        $user = $_SESSION['user'];
+        $this->render('time', ['user' => $user]);
     }
 
     public function worker_settings() {
-        // TODO display worker_settings.php
-        $this->render('worker_settings');
+        session_start();
+        $user = $_SESSION['user'];
+        $this->render('worker_settings', ['user' => $user]);
     }
 
     public function workers() {
-        //TODO display workers.php
-        $this->render('workers');
+        session_start();
+        $user = $_SESSION['user'];
+        $this->render('workers', ['user' => $user]);
     }
 
     public function manager_settings() {
-        // TODO display managet_settings.html
-        $this->render('manager_settings');
+        session_start();
+        $user = $_SESSION['user'];
+        $this->render('manager_settings', ['user' => $user]);
     }
 
     public function reports() {
-        // TODO display reports.php
-        $this->render('reports');
+        session_start();
+        $user = $_SESSION['user'];
+        $this->render('reports', ['user' => $user]);
     }
 }

@@ -7,6 +7,7 @@ class Database {
     private $password;
     private $host;
     private $database;
+    private $connection;
 
     public function __construct()
     {
@@ -20,7 +21,6 @@ class Database {
     {
         try {
             $conn = new PDO(
-                //"pgsql:host=$this->host;port=5433;dbname=$this->database",
                 "pgsql:host=$this->host;port=5677;dbname=$this->database",
                 $this->username,
                 $this->password,
