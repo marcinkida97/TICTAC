@@ -13,6 +13,8 @@ class SecurityController extends AppController
     public function login()
     {
         $userRepository = new UserRepository();
+        $workersRepository = new WorkersRepository();
+        $workplaces = $workersRepository->getWorkplaces();
 
         if (!$this->isPost()) {
             return $this->render('login');
@@ -35,20 +37,22 @@ class SecurityController extends AppController
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
-        session_start();
+        if (session_status() !== PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
         $_SESSION['user'] = $user;
 
         $url = "http://$_SERVER[HTTP_HOST]";
 
         if ($user->getRole() == 'worker') {
-            $workersRepository = new WorkersRepository();
-            $workplaces = $workersRepository->getWorkplaces();
             $timeRepository = new TimeRepository();
             $summary = $timeRepository->getTimeOverview($user->getId());
             return $this->render('time', ['user' => $user, 'workplaces' => $workplaces, 'summary' => $summary]);
         }
         if ($user->getRole() == 'manager') {
-            return $this->render('workers', ['user' => $user]);
+            $workers = $workersRepository->getWorkers();
+            return $this->render('workers', ['user' => $user,'workers' => $workers, 'workplaces' => $workplaces]);
         }
     }
 }

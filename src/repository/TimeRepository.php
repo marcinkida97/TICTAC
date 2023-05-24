@@ -9,8 +9,6 @@ class TimeRepository extends Repository
 
     public function getTimeOverview(int $uid): ?Timeoverview
     {
-        $salary = 10;
-
         if (session_status() !== PHP_SESSION_ACTIVE)
         {
             session_start();
@@ -32,7 +30,36 @@ class TimeRepository extends Repository
         $stmt->execute();
         $overall = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $timeoverview = new Timeoverview($thisMonth['sum'], $overall['sum'], $salary);
+        $stmt = $this->database->connect()->prepare('
+    SELECT time.duration, workplaces_lookup.salary
+    FROM time
+    INNER JOIN workplaces_lookup ON time.workplace = workplaces_lookup.workplace
+    WHERE EXTRACT(MONTH FROM time.start_time) = :currentMonth AND uid = :uid
+');
+        $currentMonth = date('m');
+        $stmt->bindParam(':currentMonth', $currentMonth);
+        $stmt->bindParam(':uid', $uid);
+        $stmt->execute();
+
+        $totalSalary = 0;
+
+        if ($stmt->rowCount() > 0) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $durationString = $row['duration'];
+                $salary = $row['salary'];
+
+                $startDateTime = new DateTime('00:00:00');
+                $endDateTime = new DateTime($durationString);
+                $interval = $startDateTime->diff($endDateTime);
+
+                $hours = $interval->h + ($interval->i / 60) + ($interval->s / 3600);
+
+                $payment = $hours * $salary;
+                $totalSalary += $payment;
+            }
+        }
+        $totalSalary = round($totalSalary, 2);
+        $timeoverview = new Timeoverview($thisMonth['sum'], $overall['sum'], $totalSalary);
         return $timeoverview;
     }
 
