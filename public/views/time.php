@@ -39,9 +39,9 @@
                         <input name="end-time" type="datetime-local">
                         <h3>Workplace</h3>
                         <select id="workplaces" name="workplaces">
-                            <option value="1">Opcja 1</option>
-                            <option value="2">Opcja 2</option>
-                            <option value="3">Opcja 3</option>
+                            <?php foreach ($workplaces as $workplace): ?>
+                            <option value="<?= $workplace->getWorkplace(); ?>"><?= $workplace->getWorkplace(); ?></option>
+                            <?php endforeach; ?>
                         </select>
                         <button name="time-submit-button" class="submit-button" type="submit">Submit</button>
                         <div class="message">
@@ -55,9 +55,9 @@
                     </form>
                 </div>
                 <div class="side-bar">
-                    <p>This month:</p>
-                    <p>Overall:</p>
-                    <p>Salary:</p>
+                    <p>This month: <?= $summary->getThisMonth(); ?></p>
+                    <p>Overall: <?= $summary->getOverall(); ?></p>
+                    <p>Salary: <?= $summary->getSalary(); ?>zł</p>
                 </div>
             </section>
         </main>

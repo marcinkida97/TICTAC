@@ -8,12 +8,6 @@ class DefaultController extends AppController{
         $this->render('login');
     }
 
-    public function time() {
-        session_start();
-        $user = $_SESSION['user'];
-        $this->render('time', ['user' => $user]);
-    }
-
     public function worker_settings() {
         session_start();
         $user = $_SESSION['user'];

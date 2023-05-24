@@ -47,27 +47,29 @@
                     <div class="workplaces-list">
                         <table>
                             <tr>
-                                <td><input type="checkbox"></td><td><h3>Workplace</h3></td><td><h3>Salary</h3></td>
+                                <td><input type="checkbox"></td><td><h3>Company</h3></td><td><h3>Workplace</h3></td><td><h3>Salary</h3></td>
                             </tr>
+                            <?php foreach ($workplaces as $workplace): ?>
                             <tr>
-                                <td><input type="checkbox"></td><td>Summer Garden</td><td>13zł</td>
+                                <td><input type="checkbox"></td><td><?= $workplace->getCompany(); ?></td><td><?= $workplace->getWorkplace(); ?></td><td><?= $workplace->getSalary(); ?>zł</td>
                             </tr>
-                            <tr>
-                                <td><input type="checkbox"></td><td>Bar</td><td>15zł</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td><td>Kitchen</td><td>17zł</td>
-                            </tr>
+                            <?php endforeach; ?>
                         </table>
                     </div>
                 </div>
                 <div class="workers-forms">
                     <div class="workers-add">
                         <h2>Add worker</h2>
+                        <h3>Email</h3>
+                        <input name="settings-email" type="email" placeholder="email@poczta.pl">
+                        <h3>Password</h3>
+                        <input name="settings-password" type="password" placeholder="password">
                         <h3>Name</h3>
-                        <input name="settings-name" type="text" placeholder="FirstName LastName">
-                        <h3>Position</h3>
-                        <input name="settings-login" type="text" placeholder="position">
+                        <input name="settings-name" type="text" placeholder="Name">
+                        <h3>Surname</h3>
+                        <input name="settings-surname" type="text" placeholder="Surname">
+                        <h3>Role</h3>
+                        <input name="settings-role" type="text" placeholder="Role">
                         <br><button class="submit-button">Add</button>
                     </div>
                     <div class="workplaces-add">

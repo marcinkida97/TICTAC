@@ -2,15 +2,38 @@
 
 require_once 'Repository.php';
 require_once __DIR__.'/../models/Time.php';
+require_once __DIR__.'/../models/Timeoverview.php';
 
 class TimeRepository extends Repository
 {
 
-    public function getTime(string $email): ?Time
+    public function getTimeOverview(int $uid): ?Timeoverview
     {
-        //TODO
+        $salary = 10;
 
-        return new Time();
+        if (session_status() !== PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
+        $user = $_SESSION['user'];
+        $uid = $user->getId();
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT sum(duration) FROM time WHERE date_trunc(\'month\', start_time) = date_trunc(\'month\', CURRENT_TIMESTAMP) AND uid = :uid'
+        );
+        $stmt->bindParam(':uid', $uid);
+        $stmt->execute();
+        $thisMonth = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT sum(duration) FROM time WHERE uid = :uid;
+        ');
+        $stmt->bindParam(':uid', $uid);
+        $stmt->execute();
+        $overall = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $timeoverview = new Timeoverview($thisMonth['sum'], $overall['sum'], $salary);
+        return $timeoverview;
     }
 
     public function addTime(Time $time): void
@@ -20,7 +43,10 @@ class TimeRepository extends Repository
             VALUES (?, ?, ?, ?)
         ');
 
-        session_start();
+        if (session_status() !== PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
         $user = $_SESSION['user'];
 
         $stmt->execute([

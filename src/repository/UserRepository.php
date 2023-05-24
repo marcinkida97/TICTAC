@@ -30,4 +30,19 @@ class UserRepository extends Repository
             $user['company']
         );
     }
+
+    public function changeUserData(User $user): void
+    {
+        $stmt = $this->database->connect()->prepare('
+            UPDATE users SET email = ?, password = ?, name = ?, surname = ? WHERE user_id = ?
+        ');
+
+        $stmt->execute([
+            $user->getEmail(),
+            $user->getPassword(),
+            $user->getName(),
+            $user->getSurname(),
+            $user->getId()
+        ]);
+    }
 }

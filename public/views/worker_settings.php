@@ -31,14 +31,25 @@
             </header>
             <section class="main-section">
                 <div class="settings">
-                    <h2>Change user data</h2>
-                    <h3>Name</h3>
-                    <input name="settings-name" type="text" placeholder="FirstName LastName">
-                    <h3>Login</h3>
-                    <input name="settings-login" type="text" placeholder="username">
-                    <h3>Password</h3>
-                    <input name="settings-password" type="password" placeholder="password">
-                    <button class="submit-button">Submit</button>
+                    <form id="manager-settings-form" action="changeUserData" method="POST">
+                        <h2>Change user data</h2>
+                        <h3>Name</h3>
+                        <input name="settings-name" type="text" placeholder="Name">
+                        <h3>Surname</h3>
+                        <input name="settings-surname" type="text" placeholder="Surname">
+                        <h3>Email</h3>
+                        <input name="settings-email" type="email" placeholder="Email">
+                        <h3>Password</h3>
+                        <input name="settings-password" type="password" placeholder="password">
+                        <button class="submit-button">Submit</button>
+                    </form>
+                    <?php if(isset($messages)) {
+                        foreach($messages as $message) {
+                            echo $message;
+                        }
+                    }
+                    ?>
+                    </form>
                 </div>
             </section>
         </main>

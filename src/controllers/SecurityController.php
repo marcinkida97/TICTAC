@@ -5,6 +5,8 @@ use models\User;
 require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../repository/UserRepository.php';
+require_once __DIR__.'/../repository/WorkersRepository.php';
+require_once __DIR__.'/../repository/TimeRepository.php';
 
 class SecurityController extends AppController
 {
@@ -39,7 +41,11 @@ class SecurityController extends AppController
         $url = "http://$_SERVER[HTTP_HOST]";
 
         if ($user->getRole() == 'worker') {
-            return $this->render('time', ['user' => $user]);
+            $workersRepository = new WorkersRepository();
+            $workplaces = $workersRepository->getWorkplaces();
+            $timeRepository = new TimeRepository();
+            $summary = $timeRepository->getTimeOverview($user->getId());
+            return $this->render('time', ['user' => $user, 'workplaces' => $workplaces, 'summary' => $summary]);
         }
         if ($user->getRole() == 'manager') {
             return $this->render('workers', ['user' => $user]);

@@ -1,7 +1,5 @@
 <?php
 
-//namespace models; //to mi wywaliło błąd, że nie znajdowało klasy user!
-
 class User
 {
     private $id;

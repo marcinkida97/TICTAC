@@ -19,6 +19,7 @@ class WorkersController extends AppController
 
     public function workers() {
         $workers = $this->workersRepository->getWorkers();
-        $this->render('workers', ['workers' => $workers]);
+        $workplaces = $this->workersRepository->getWorkplaces();
+        $this->render('workers', ['workers' => $workers, 'workplaces' => $workplaces]);
     }
 }
