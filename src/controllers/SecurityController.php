@@ -6,6 +6,7 @@ require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../repository/UserRepository.php';
 require_once __DIR__.'/../repository/WorkersRepository.php';
+require_once __DIR__.'/../repository/WorkplacesRepository.php';
 require_once __DIR__.'/../repository/TimeRepository.php';
 
 class SecurityController extends AppController
@@ -13,8 +14,7 @@ class SecurityController extends AppController
     public function login()
     {
         $userRepository = new UserRepository();
-        $workersRepository = new WorkersRepository();
-        $workplaces = $workersRepository->getWorkplaces();
+
 
         if (!$this->isPost()) {
             return $this->render('login');
@@ -42,6 +42,10 @@ class SecurityController extends AppController
             session_start();
         }
         $_SESSION['user'] = $user;
+
+        $workplacesRepository = new WorkplacesRepository();
+        $workersRepository = new WorkersRepository();
+        $workplaces = $workplacesRepository->getWorkplaces();
 
         $url = "http://$_SERVER[HTTP_HOST]";
 

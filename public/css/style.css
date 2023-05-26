@@ -2,6 +2,10 @@ body {
     margin: 0;
 }
 
+h3 {
+    margin: 0;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -10,7 +14,7 @@ img {
 .login-page-container {
     width: 100vw;
     height: 100vh;
-    background: transparent linear-gradient(180deg, #FF9E4A 0%, #974800 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #FFFFFF 0%, #87CEFA 100%) 0% 0% no-repeat padding-box;
 
     display: flex;
     flex-direction: row;
@@ -49,16 +53,15 @@ img {
 input {
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid #974800;
+    border-bottom: 1px solid #87CEFA;
     padding: 1em;
     margin: 1em;
-    width: 50%;
     color: #707070;
 }
 
 .login-button {
-    background: transparent linear-gradient(180deg, #FF9E4A 0%, #974800 100%) 0% 0% no-repeat padding-box;
-    border: 1px solid #974800;
+    background-color: #87CEFA;
+    border: 1px solid #87CEFA;
     border-radius: 1em;
     color: #FFFFFF;
     width: 40%;
@@ -97,15 +100,15 @@ input {
     justify-content: flex-start;
     height: 100vh;
     font-family: Rockwell;
-    color: #FFFFFF;
+    color: #524C47;
 }
 
 nav {
     width: 15vw;
     min-width: 16em;
     height: 100%;
-    background: transparent linear-gradient(180deg, #FF9E4A 0%, #974800 100%) 0% 0% no-repeat padding-box;
-    border-right: 1px solid #974800;
+    background-color: #87CEFA;
+    border-right: 1px solid #87CEFA;
 
     display: flex;
     flex-direction: column;
@@ -159,7 +162,7 @@ li:last-child {
 main {
     width: 85vw;
     height: 100vh;
-    background: #FF9E4A 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
     display: flex;
     flex-direction: column;
 }
@@ -168,8 +171,9 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 1em 2em;
-    border-bottom: 1px solid #974800;
-    color: #FFFFFF;
+    border-bottom: 1px solid #87CEFA;
+    color: #524C47;
+    background-color: #FFFFFF;
 }
 
 .main-section {
@@ -179,7 +183,11 @@ header {
     height: 100%;
 }
 
-.time-input {
+.main-section ::placeholder {
+    color: #524C47;
+}
+
+.div-input {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -188,26 +196,26 @@ header {
     align-items: center;
 }
 
-h3 {
-    margin: 0;
-}
-
-.time-input #time-input-form {
+#input-form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
-.time-input #time-input-form input {
-    color: #FFFFFF;
+.div-input input {
+    color: #524C47;
     font-size: 1em;
     max-width: 15em;
 }
 
+select {
+    border-radius: 3px;
+    max-width: 15em;
+}
+
 .submit-button {
-    background: transparent linear-gradient(180deg, #FF9E4A 0%, #974800 100%) 0% 0% no-repeat padding-box;
-    border: 1px solid #974800;
+    background-color: #87CEFA;
+    border: 1px solid #87CEFA;
     border-radius: 1em;
     color: #FFFFFF;
     width: 40%;
@@ -221,14 +229,14 @@ h3 {
     width: 15vw;
     min-width: 16em;
     height: auto;
-    background: transparent linear-gradient(180deg, #FF9E4A 0%, #974800 100%) 0% 0% no-repeat padding-box;
-    border-left: 1px solid #974800;
+    background-color: #FFFFFF;
+    border-left: 1px solid #87CEFA;
     text-align: center;
     padding-top: 2em;
 }
 
 p {
-    color: #FFFFFF;
+    color: #524C47;
 }
 
 .settings {
@@ -240,16 +248,6 @@ p {
     align-items: center;
 }
 
-.settings > input {
-    color: #FFFFFF;
-    font-size: 1em;
-    max-width: 15em;
-}
-
-.main-section ::placeholder {
-    color: #FFFFFF;
-}
-
 .reports {
     height: auto;
     width: 100%;
@@ -259,8 +257,8 @@ p {
 }
 
 .reports > button {
-    background: transparent linear-gradient(180deg, #FF9E4A 0%, #974800 100%) 0% 0% no-repeat padding-box;
-    border: 1px solid #974800;
+    background: #87CEFA;
+    border: 1px solid #87CEFA;
     border-radius: 1em;
     color: #FFFFFF;
     width: 40%;
@@ -297,17 +295,17 @@ table {
 }
 
 td, th {
-    border: 1px solid #974800;
+    border: 1px solid #87CEFA;
     padding-left: 0.5em;
     padding-right: 0.5em;
 }
 
 tr:nth-of-type(even) td {
-    background-color: #FF9E4A;
+    background-color: #FFFFFF;
 }
   
 tr:nth-of-type(odd) td {
-    background-color: #974800;
+    background-color: #ABDCFB;
 }
 
 .workers-forms {

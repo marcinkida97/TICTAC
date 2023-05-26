@@ -11,6 +11,7 @@
             <img src="public/img/logo.svg">
             <ul>
                 <li><a href="workers" class="button">Workers</a></li>
+                <li><a href="workplaces" class="button">Workplaces</a></li>
                 <li><a href="manager_settings" class="button">Settings</a></li>
                 <li><a href="reports" class="button">Reports</a></li>
                 <li><a href="/" class="button">Logout</a></li>
@@ -19,12 +20,9 @@
         <main>
             <header>
                 <div class="user-data">
-                    <?php if(isset($user)) {
-                        echo $user->getName() . " " . $user->getSurname() . "<br>";
-                        echo $user->getRole() . "<br>";
-                        echo $user->getCompany();
-                    }
-                    ?>
+                    <h2><?php echo $user->getName() . " " . $user->getSurname() . "<br>"; ?></h2>
+                    <h3><?php echo $user->getRole() . "<br>"; ?></h3>
+                    <h3><?php echo $user->getCompany(); ?></h3>
                 </div>
                 <div class="page-name">
                     <h1>Reports</h1>

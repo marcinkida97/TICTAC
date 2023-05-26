@@ -6,9 +6,10 @@ require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../models/Worker.php';
 require_once __DIR__.'/../repository/WorkersRepository.php';
+require_once __DIR__.'/../repository/WorkplacesRepository.php';
 require_once __DIR__.'/../repository/UserRepository.php';
 
-class WorkersController extends AppController
+class WorkplacesController extends AppController
 {
     private $mesages = [];
     private $workersRepository;
@@ -21,6 +22,7 @@ class WorkersController extends AppController
     {
         parent::__construct();
         $this->workersRepository = new WorkersRepository();
+        $this->workplacesRepository = new WorkplacesRepository();
         $this->userRepository = new UserRepository();
         if (session_status() !== PHP_SESSION_ACTIVE)
         {
@@ -28,26 +30,26 @@ class WorkersController extends AppController
         }
         $this->user = $_SESSION['user'];
         $this->workers = $this->workersRepository->getWorkers();
+        $this->workplaces = $this->workplacesRepository->getWorkplaces();
     }
 
-    public function workers() {
-        $this->render('workers', ['user' => $this->user ,'workers' => $this->workers]);
+    public function workplaces() {
+        $this->render('workplaces', ['user' => $this->user ,'workers' => $this->workers, 'workplaces' => $this->workplaces]);
     }
 
-    public function addWorker()
+    public function addWorkplace()
     {
-        if (session_status() !== PHP_SESSION_ACTIVE)
-        {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();
         }
         $user = $_SESSION['user'];
         $company = $user->getCompany();
 
-        if($this->isPost()) {
-            $worker = new Worker($_POST['new-worker-email'], $_POST['new-worker-password'], $_POST['new-worker-name'], $_POST['new-worker-surname'], $_POST['new-worker-role'], $company);
-            $this->workersRepository->addWorker($worker);
-            $this->render('workers', ['user' => $this->user ,'workers' => $this->workers]);
+        if ($this->isPost()) {
+            $workplace = new Workplace($company, $_POST['new-workplace-name'], $_POST['new-workplace-salary']);
+            $this->workplacesRepository->addWorkplace($workplace);
+            $this->render('workplaces', ['user' => $this->user, 'workers' => $this->workers, 'workplaces' => $this->workplaces]);
         }
-        $this->render('workers', ['user' => $this->user ,'workers' => $this->workers]);
+        $this->render('workplaces', ['user' => $this->user, 'workers' => $this->workers, 'workplaces' => $this->workplaces]);
     }
 }

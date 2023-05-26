@@ -19,10 +19,4 @@ class DefaultController extends AppController{
         $user = $_SESSION['user'];
         $this->render('manager_settings', ['user' => $user]);
     }
-
-    public function reports() {
-        session_start();
-        $user = $_SESSION['user'];
-        $this->render('reports', ['user' => $user]);
-    }
 }

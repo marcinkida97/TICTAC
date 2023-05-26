@@ -7,13 +7,13 @@ require_once __DIR__.'/../models/Time.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../repository/UserRepository.php';
 require_once __DIR__.'/../repository/TimeRepository.php';
-require_once __DIR__.'/../repository/WorkersRepository.php';
+require_once __DIR__.'/../repository/WorkplacesRepository.php';
 
 class TimeController extends AppController
 {
     private $mesages = [];
     private $timeRepository;
-    private $workersRepository;
+    private $workplacesRepository;
     private $user;
     private $workplaces;
     private $summary;
@@ -22,13 +22,13 @@ class TimeController extends AppController
     {
         parent::__construct();
         $this->timeRepository = new TimeRepository();
-        $this->workersRepository = new WorkersRepository();
+        $this->workplacesRepository = new WorkplacesRepository();
         if (session_status() !== PHP_SESSION_ACTIVE)
         {
             session_start();
         }
         $this->user = $_SESSION['user'];
-        $this->workplaces = $this->workersRepository->getWorkplaces();
+        $this->workplaces = $this->workplacesRepository->getWorkplaces();
         $this->summary = $this->timeRepository->getTimeOverview($this->user->getId());
     }
 
@@ -43,7 +43,6 @@ class TimeController extends AppController
             $this->timeRepository->addTime($time);
             return $this->render('time', ['user' => $this->user, 'messages' => $this->mesages, 'workplaces' => $this->workplaces, 'summary' => $this->summary]);
         }
-
         return $this->render('time', ['user' => $this->user, 'messages' => $this->mesages, 'workplaces' => $this->workplaces, 'summary' => $this->summary]);
     }
 }

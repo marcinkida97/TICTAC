@@ -18,28 +18,21 @@
         <main>
             <header>
                 <div class="user-data">
-                    <?php if(isset($user)) {
-                        echo $user->getName() . " " . $user->getSurname() . "<br>";
-                        echo $user->getRole() . "<br>";
-                        echo $user->getCompany();
-                    }
-                    ?>
+                    <h2><?php echo $user->getName() . " " . $user->getSurname() . "<br>"; ?></h2>
+                    <h3><?php echo $user->getRole() . "<br>"; ?></h3>
+                    <h3><?php echo $user->getCompany(); ?></h3>
                 </div>
                 <div class="page-name">
                     <h1>Settings</h1>
                 </div>
             </header>
             <section class="main-section">
-                <div class="settings">
-                    <form id="manager-settings-form" action="changeUserData" method="POST">
+                <div class="div-input">
+                    <form id="input-form" action="changeUserData" method="POST">
                         <h2>Change user data</h2>
-                        <h3>Name</h3>
                         <input name="settings-name" type="text" placeholder="Name">
-                        <h3>Surname</h3>
                         <input name="settings-surname" type="text" placeholder="Surname">
-                        <h3>Email</h3>
                         <input name="settings-email" type="email" placeholder="Email">
-                        <h3>Password</h3>
                         <input name="settings-password" type="password" placeholder="password">
                         <button class="submit-button">Submit</button>
                     </form>

@@ -18,29 +18,25 @@
         <main>
             <header>
                 <div class="user-data">
-                    <?php if(isset($user)) {
-                        echo $user->getName() . " " . $user->getSurname() . "<br>";
-                        echo $user->getRole() . "<br>";
-                        echo $user->getCompany();
-                    }
-                    ?>
+                    <h2><?php echo $user->getName() . " " . $user->getSurname() . "<br>"; ?></h2>
+                    <h3><?php echo $user->getRole() . "<br>"; ?></h3>
+                    <h3><?php echo $user->getCompany(); ?></h3>
                 </div>
                 <div class="page-name">
                     <h1>Time</h1>
                 </div>
             </header>
             <section class="main-section">
-                <div class="time-input">
-                    <form id="time-input-form" action="addTime" method="POST">
+                <div class="div-input">
+                    <form id="input-form" action="addTime" method="POST">
                         <h2>Enter time</h2>
                         <h3>Start time</h3>
                         <input name="start-time" type="datetime-local">
                         <h3>End time</h3>
                         <input name="end-time" type="datetime-local">
-                        <h3>Workplace</h3>
                         <select id="workplaces" name="workplaces">
                             <?php foreach ($workplaces as $workplace): ?>
-                            <option value="<?= $workplace->getWorkplace(); ?>"><?= $workplace->getWorkplace(); ?></option>
+                                <option value="<?= $workplace->getWorkplace(); ?>"><?= $workplace->getWorkplace(); ?></option>
                             <?php endforeach; ?>
                         </select>
                         <button name="time-submit-button" class="submit-button" type="submit">Submit</button>
@@ -55,9 +51,9 @@
                     </form>
                 </div>
                 <div class="side-bar">
-                    <p>This month: <?= $summary->getThisMonth(); ?></p>
-                    <p>Overall: <?= $summary->getOverall(); ?></p>
-                    <p>Salary: <?= $summary->getSalary(); ?>zł</p>
+                    <h3>This month: <?= $summary->getThisMonth(); ?></h3><br>
+                    <h3>Overall: <?= $summary->getOverall(); ?></h3><br>
+                    <h3>Salary: <?= $summary->getSalary(); ?>zł</h3>
                 </div>
             </section>
         </main>

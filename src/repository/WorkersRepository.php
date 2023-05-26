@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Repository.php';
-require_once __DIR__.'/../models/Workplace.php';
+require_once __DIR__.'/../models/Worker.php';
 
 class WorkersRepository extends Repository
 {
@@ -38,32 +38,20 @@ class WorkersRepository extends Repository
         return $result;
     }
 
-    public function getWorkplaces() :array
+    public function addWorker(Worker $worker): void
     {
-        $result = [];
-
-        if (session_status() !== PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
-        $user = $_SESSION['user'];
-        $company = $user->getCompany();
-
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM workplaces_lookup WHERE company = :company
+            INSERT INTO users (email, password, name, surname, role, company)
+            VALUES (?, ?, ?, ?, ?, ?)
         ');
-        $stmt->bindParam(':company', $company);
-        $stmt->execute();
-        $workplaces = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach ($workplaces as $workplace) {
-            $result[] = new Workplace(
-                $workplace['company'],
-                $workplace['workplace'],
-                $workplace['salary']
-            );
-        }
-
-        return $result;
+        $stmt->execute([
+            $worker->getEmail(),
+            $worker->getPassword(),
+            $worker->getName(),
+            $worker->getSurname(),
+            $worker->getRole(),
+            $worker->getCompany()
+        ]);
     }
 }
