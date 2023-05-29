@@ -7,20 +7,19 @@ class DefaultController extends AppController {
         $this->render('login');
     }
 
-    public function workerSettings(): void {
+    public function worker_settings(): void {
         session_start();
         $user = $_SESSION['user'];
         $this->render('worker_settings', ['user' => $user]);
     }
 
-    public function managerSettings(): void {
+    public function manager_settings(): void {
         session_start();
         $user = $_SESSION['user'];
         $this->render('manager_settings', ['user' => $user]);
     }
 
     public function logout(): void {
-        session_destroy();
-        setcookie(session_name(), '', time() - 3600);
+        $this->render('logout');
     }
 }

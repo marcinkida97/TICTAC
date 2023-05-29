@@ -13,6 +13,7 @@ Routing::get('workplaces', 'WorkplacesController');
 Routing::get('manager_settings', 'DefaultController');
 Routing::get('reports', 'ReportsController');
 Routing::get('register', 'RegisterController');
+Routing::get('logout', 'DefaultController');
 
 Routing::post('login', 'SecurityController');
 Routing::post('addTime', 'TimeController');

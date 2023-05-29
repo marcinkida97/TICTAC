@@ -7,27 +7,9 @@
 </head>
 <body>
     <div class="base-container">
-        <nav>
-            <img src="public/img/logo.svg">
-            <ul>
-                <li><a href="time" class="button">Time</a></li>
-                <li><a href="worker_settings" class="button">Settings</a></li>
-                <form action="logout">
-                <li><a href="/" class="button">Logout</a></li>
-                </form>
-            </ul>
-        </nav>
+        <?php include('worker_navigation.php') ?>
         <main>
-            <header>
-                <div class="user-data">
-                    <h2><?php echo $user->getName() . " " . $user->getSurname() . "<br>"; ?></h2>
-                    <h3><?php echo $user->getRole() . "<br>"; ?></h3>
-                    <h3><?php echo $user->getCompany(); ?></h3>
-                </div>
-                <div class="page-name">
-                    <h1>Settings</h1>
-                </div>
-            </header>
+            <?php include('header.php') ?>
             <section class="main-section">
                 <div class="div-input">
                     <form id="input-form" action="changeUserData" method="POST">
