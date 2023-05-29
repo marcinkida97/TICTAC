@@ -11,7 +11,7 @@ require_once __DIR__.'/../repository/WorkplacesRepository.php';
 
 class TimeController extends AppController
 {
-    private $mesages = [];
+    private $messages = [];
     private $timeRepository;
     private $workplacesRepository;
     private $user;
@@ -41,8 +41,9 @@ class TimeController extends AppController
         if($this->isPost()) {
             $time = new Time($_POST['start-time'], $_POST['end-time'], $_POST['workplaces']);
             $this->timeRepository->addTime($time);
-            return $this->render('time', ['user' => $this->user, 'messages' => $this->mesages, 'workplaces' => $this->workplaces, 'summary' => $this->summary]);
+            $this->messages[] = "Time added successfully!";
         }
-        return $this->render('time', ['user' => $this->user, 'messages' => $this->mesages, 'workplaces' => $this->workplaces, 'summary' => $this->summary]);
+
+        return $this->render('time', ['user' => $this->user, 'messages' => $this->messages, 'workplaces' => $this->workplaces, 'summary' => $this->summary]);
     }
 }

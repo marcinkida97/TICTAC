@@ -14,7 +14,9 @@
                 <li><a href="workplaces" class="button">Workplaces</a></li>
                 <li><a href="manager_settings" class="button">Settings</a></li>
                 <li><a href="reports" class="button">Reports</a></li>
+                <form action="logout">
                 <li><a href="/" class="button">Logout</a></li>
+                </form>
             </ul>
         </nav>
         <main>

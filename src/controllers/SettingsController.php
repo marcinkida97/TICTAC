@@ -11,7 +11,7 @@ class SettingsController extends AppController
 
     public function changeUserData()
     {
-        $userRepository = new UserRepository();
+        $this->userRepository = new UserRepository();
 
         if (session_status() !== PHP_SESSION_ACTIVE)
         {
@@ -20,25 +20,22 @@ class SettingsController extends AppController
         $user = $_SESSION['user'];
 
         if($this->isPost()) {
-            $newName = $_POST['settings-name'];
-            if(!$newName){$newName = $user->getName();}
-            $newSurname = $_POST['settings-surname'];
-            if(!$newSurname){$newSurname = $user->getSurname();}
-            $newEmail = $_POST['settings-email'];
-            if(!$newEmail){$newEmail = $user->getEmail();}
-            $newPassword = $_POST['settings-password'];
-            if(!$newPassword){$newPassword = $user->getPassword();}
+            $newName = $_POST['settings-name'] ?: $user->getName();
+            $newSurname = $_POST['settings-surname'] ?: $user->getSurname();
+            $newEmail = $_POST['settings-email'] ?: $user->getEmail();
+            $newPassword = $_POST['settings-password'] ?: $user->getPassword();
 
             $newUserData = new User($user->getId(), $newEmail, $newPassword, $newName, $newSurname, $user->getRole(), $user->getCompany());
-            $userRepository->changeUserData($newUserData);
+            $this->userRepository->changeUserData($newUserData);
 
             $_SESSION['user'] = $newUserData;
 
             if ($user->getRole() == 'worker') {
-                return $this->render('worker_settings', ['user' => $newUserData, 'messages' => ["Changes saved in database"]]);
+                return $this->render('worker_settings', ['user' => $newUserData, 'messages' => ["Changes saved in the database"]]);
             }
+
             if ($user->getRole() == 'manager') {
-                return $this->render('manager_settings', ['user' => $newUserData, 'messages' => ["Changes saved in database"]]);
+                return $this->render('manager_settings', ['user' => $newUserData, 'messages' => ["Changes saved in the database"]]);
             }
         }
     }

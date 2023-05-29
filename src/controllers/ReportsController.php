@@ -11,28 +11,27 @@ require_once __DIR__.'/../repository/ReportsRepository.php';
 
 class ReportsController extends AppController
 {
-    private $mesages = [];
+    private $messages = [];
     private $user;
     private $reportsRepository;
 
     public function __construct()
     {
         parent::__construct();
-        if (session_status() !== PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
+        session_start();
+
         $this->user = $_SESSION['user'];
         $this->reportsRepository = new ReportsRepository();
     }
 
-    public function reports() {
+    public function reports()
+    {
         $this->render('reports', ['user' => $this->user]);
     }
 
     public function generateMonthlyReport()
     {
         $this->reportsRepository->generateMonthlyReport();
-        return $this->render('reports', ['user' => $this->user, 'messages' => $this->mesages]);
+        $this->render('reports', ['user' => $this->user, 'messages' => $this->messages]);
     }
 }

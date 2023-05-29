@@ -10,7 +10,7 @@ require_once __DIR__.'/../repository/UserRepository.php';
 
 class WorkersController extends AppController
 {
-    private $mesages = [];
+    private $messages = [];
     private $workersRepository;
     private $userRepository;
     private $user;
@@ -31,23 +31,19 @@ class WorkersController extends AppController
     }
 
     public function workers() {
-        $this->render('workers', ['user' => $this->user ,'workers' => $this->workers]);
+        return $this->render('workers', ['user' => $this->user, 'workers' => $this->workers]);
     }
 
     public function addWorker()
     {
-        if (session_status() !== PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
-        $user = $_SESSION['user'];
-        $company = $user->getCompany();
-
         if($this->isPost()) {
+            $user = $_SESSION['user'];
+            $company = $user->getCompany();
             $worker = new Worker($_POST['new-worker-email'], $_POST['new-worker-password'], $_POST['new-worker-name'], $_POST['new-worker-surname'], $_POST['new-worker-role'], $company);
             $this->workersRepository->addWorker($worker);
-            $this->render('workers', ['user' => $this->user ,'workers' => $this->workers]);
+            $this->messages[] = "Worker added successfully!";
         }
-        $this->render('workers', ['user' => $this->user ,'workers' => $this->workers]);
+
+        return $this->render('workers', ['user' => $this->user, 'workers' => $this->workers, 'messages' => $this->messages]);
     }
 }

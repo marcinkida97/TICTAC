@@ -5,14 +5,16 @@ use models\User;
 require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../models/Worker.php';
+require_once __DIR__.'/../models/Workplace.php';
 require_once __DIR__.'/../repository/WorkersRepository.php';
 require_once __DIR__.'/../repository/WorkplacesRepository.php';
 require_once __DIR__.'/../repository/UserRepository.php';
 
 class WorkplacesController extends AppController
 {
-    private $mesages = [];
+    private $messages = [];
     private $workersRepository;
+    private $workplacesRepository;
     private $userRepository;
     private $user;
     private $workers;
@@ -33,23 +35,21 @@ class WorkplacesController extends AppController
         $this->workplaces = $this->workplacesRepository->getWorkplaces();
     }
 
-    public function workplaces() {
-        $this->render('workplaces', ['user' => $this->user ,'workers' => $this->workers, 'workplaces' => $this->workplaces]);
+    public function workplaces()
+    {
+        return $this->render('workplaces', ['user' => $this->user, 'workers' => $this->workers, 'workplaces' => $this->workplaces]);
     }
 
     public function addWorkplace()
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
-        }
-        $user = $_SESSION['user'];
-        $company = $user->getCompany();
-
-        if ($this->isPost()) {
+        if($this->isPost()) {
+            $user = $_SESSION['user'];
+            $company = $user->getCompany();
             $workplace = new Workplace($company, $_POST['new-workplace-name'], $_POST['new-workplace-salary']);
             $this->workplacesRepository->addWorkplace($workplace);
-            $this->render('workplaces', ['user' => $this->user, 'workers' => $this->workers, 'workplaces' => $this->workplaces]);
+            $this->messages[] = "Workplace added successfully!";
         }
-        $this->render('workplaces', ['user' => $this->user, 'workers' => $this->workers, 'workplaces' => $this->workplaces]);
+
+        return $this->render('workplaces', ['user' => $this->user, 'workers' => $this->workers, 'workplaces' => $this->workplaces, 'messages' => $this->messages]);
     }
 }

@@ -15,7 +15,6 @@ class SecurityController extends AppController
     {
         $userRepository = new UserRepository();
 
-
         if (!$this->isPost()) {
             return $this->render('login');
         }
@@ -25,11 +24,7 @@ class SecurityController extends AppController
 
         $user = $userRepository->getUser($email);
 
-        if (!$user) {
-            return $this->render('login', ['messages' => ['User not exists!']]);
-        }
-
-        if ($user->getEmail() !== $email) {
+        if (!$user || $user->getEmail() !== $email) {
             return $this->render('login', ['messages' => ['User with this email does not exist!']]);
         }
 
@@ -37,16 +32,12 @@ class SecurityController extends AppController
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
-        if (session_status() !== PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
+        session_start();
         $_SESSION['user'] = $user;
 
         $workplacesRepository = new WorkplacesRepository();
         $workersRepository = new WorkersRepository();
         $workplaces = $workplacesRepository->getWorkplaces();
-
         $url = "http://$_SERVER[HTTP_HOST]";
 
         if ($user->getRole() == 'worker') {
@@ -54,6 +45,7 @@ class SecurityController extends AppController
             $summary = $timeRepository->getTimeOverview($user->getId());
             return $this->render('time', ['user' => $user, 'workplaces' => $workplaces, 'summary' => $summary]);
         }
+
         if ($user->getRole() == 'manager') {
             $workers = $workersRepository->getWorkers();
             return $this->render('workers', ['user' => $user,'workers' => $workers, 'workplaces' => $workplaces]);

@@ -7,6 +7,7 @@ require_once 'src/controllers/WorkersController.php';
 require_once 'src/controllers/WorkplacesController.php';
 require_once 'src/controllers/SettingsController.php';
 require_once 'src/controllers/ReportsController.php';
+require_once 'src/controllers/RegisterController.php';
 
 class Routing {
 

@@ -2,21 +2,25 @@
 
 require_once 'AppController.php';
 
-class DefaultController extends AppController{
-
-    public function index() {
+class DefaultController extends AppController {
+    public function index(): void {
         $this->render('login');
     }
 
-    public function worker_settings() {
+    public function workerSettings(): void {
         session_start();
         $user = $_SESSION['user'];
         $this->render('worker_settings', ['user' => $user]);
     }
 
-    public function manager_settings() {
+    public function managerSettings(): void {
         session_start();
         $user = $_SESSION['user'];
         $this->render('manager_settings', ['user' => $user]);
+    }
+
+    public function logout(): void {
+        session_destroy();
+        setcookie(session_name(), '', time() - 3600);
     }
 }
