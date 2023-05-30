@@ -26,6 +26,7 @@ class WorkplacesRepository extends Repository
 
         foreach ($workplaces as $workplace) {
             $result[] = new Workplace(
+                $workplace['workplace_id'],
                 $workplace['company'],
                 $workplace['workplace'],
                 $workplace['salary']

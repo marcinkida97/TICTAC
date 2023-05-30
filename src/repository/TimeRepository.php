@@ -2,6 +2,7 @@
 
 require_once 'Repository.php';
 require_once __DIR__.'/../models/Time.php';
+require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../models/Timeoverview.php';
 
 class TimeRepository extends Repository
@@ -31,11 +32,11 @@ class TimeRepository extends Repository
         $overall = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $stmt = $this->database->connect()->prepare('
-    SELECT time.duration, workplaces_lookup.salary
-    FROM time
-    INNER JOIN workplaces_lookup ON time.workplace = workplaces_lookup.workplace
-    WHERE EXTRACT(MONTH FROM time.start_time) = :currentMonth AND uid = :uid
-');
+            SELECT time.duration, workplaces_lookup.salary
+            FROM time
+            INNER JOIN workplaces_lookup ON time.workplace = workplaces_lookup.workplace_id
+            WHERE EXTRACT(MONTH FROM time.start_time) = :currentMonth AND uid = :uid
+        ');
         $currentMonth = date('m');
         $stmt->bindParam(':currentMonth', $currentMonth);
         $stmt->bindParam(':uid', $uid);
@@ -63,8 +64,18 @@ class TimeRepository extends Repository
         return $timeoverview;
     }
 
-    public function addTime(Time $time): void
+    public function addTime(Time $time, User $user): void
     {
+        $company = $user->getCompany();
+        $workplace = $time->getWorkplace();
+        $stmt = $this->database->connect()->prepare('
+            SELECT workplace_id FROM workplaces_lookup WHERE company = :company AND workplace = :workplace;
+        ');
+        $stmt->bindParam(':company', $company);
+        $stmt->bindParam(':workplace', $workplace);
+        $stmt->execute();
+        $workplace_id = $stmt->fetch(PDO::FETCH_ASSOC);
+
         $stmt = $this->database->connect()->prepare('
             INSERT INTO time (uid, start_time, end_time, workplace)
             VALUES (?, ?, ?, ?)
@@ -80,7 +91,7 @@ class TimeRepository extends Repository
             $user->getId(),
             $time->getStartTime(),
             $time->getEndTime(),
-            $time->getWorkplace()
+            $workplace_id['workplace_id']
         ]);
     }
 }

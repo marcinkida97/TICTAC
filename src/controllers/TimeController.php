@@ -40,7 +40,7 @@ class TimeController extends AppController
     {
         if($this->isPost()) {
             $time = new Time($_POST['start-time'], $_POST['end-time'], $_POST['workplaces']);
-            $this->timeRepository->addTime($time);
+            $this->timeRepository->addTime($time, $this->user);
             $this->messages[] = "Time added successfully!";
         }
 

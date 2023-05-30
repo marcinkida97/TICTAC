@@ -42,10 +42,12 @@ class WorkplacesController extends AppController
 
     public function addWorkplace()
     {
+        $workplace_id = -1;
+
         if($this->isPost()) {
             $user = $_SESSION['user'];
             $company = $user->getCompany();
-            $workplace = new Workplace($company, $_POST['new-workplace-name'], $_POST['new-workplace-salary']);
+            $workplace = new Workplace($workplace_id, $company, $_POST['new-workplace-name'], $_POST['new-workplace-salary']);
             $this->workplacesRepository->addWorkplace($workplace);
             $this->messages[] = "Workplace added successfully!";
         }

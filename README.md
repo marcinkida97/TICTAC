@@ -30,8 +30,8 @@ W zapytaniach stosowane są JOINY, odwołujemy się do relacyjnych tabel.
 
 Hasła są hashowane, dostęp do zawartości dla zalogowanych użytkowników nie jest osiągalny bez autoryzacji.
 
-
-22. BRAK REPLIKACJI KODU
-
-
 24. BAZA DANYCH ZRZUCONA DO PLIKU .SQL
+
+
+Zrobić reports i singletona na połączenie z bazą danych
+
