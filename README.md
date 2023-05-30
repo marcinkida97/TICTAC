@@ -35,3 +35,4 @@ Hasła są hashowane, dostęp do zawartości dla zalogowanych użytkowników nie
 
 Zrobić reports i singletona na połączenie z bazą danych
 
+![ERD](ERD.svg)
