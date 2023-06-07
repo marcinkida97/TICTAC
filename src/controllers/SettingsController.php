@@ -6,7 +6,6 @@ require_once __DIR__.'/../repository/UserRepository.php';
 
 class SettingsController extends AppController
 {
-    private $messages = [];
     private $userRepository;
 
     public function changeUserData()

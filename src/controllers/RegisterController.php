@@ -3,15 +3,18 @@
 require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../repository/ManagerRepository.php';
+require_once __DIR__.'/../encryption/PasswordBuilderImpl.php';
 
 class RegisterController extends AppController {
     private $defaultId = 0;
     private $defaultRole = "manager";
     private $managerRepository;
+    private $passwordBuilder;
 
     public function __construct() {
         parent::__construct();
-        $this->managerRepository = new ManagerRepository();
+        $this->passwordBuilder = new PasswordBuilderImpl();
+        $this->managerRepository = new ManagerRepository(new MyEncryptor());
     }
 
     public function register(): void {

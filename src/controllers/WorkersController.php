@@ -15,7 +15,6 @@ class WorkersController extends AppController
     private $userRepository;
     private $user;
     private $workers;
-    private $workplaces;
 
     public function __construct()
     {

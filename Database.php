@@ -10,13 +10,23 @@ class Database {
     private $port;
     private $connection;
 
-    public function __construct()
+    private static $instance;
+
+    private function __construct()
     {
         $this->username = USERNAME;
         $this->password = PASSWORD;
         $this->host = HOST;
         $this->database = DATABASE;
         $this->port = PORT;
+    }
+
+    public static function getInstance()
+    {
+        if (!isset(self::$instance)) {
+            self::$instance = new self();
+        }
+        return self::$instance;
     }
 
     public function connect()

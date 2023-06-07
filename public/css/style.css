@@ -21,7 +21,9 @@ img {
 .logo,
 .login-container {
     width: 50%;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 5%;
     margin: 1%;
 }
@@ -31,9 +33,8 @@ img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 40%;
+    width: 60%;
     height: auto;
-    margin: 25%;
     padding: 1em 0em;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: inset 6px 6px 6px #0000004D, 6px 6px 6px #0000004D;
@@ -68,30 +69,6 @@ input {
     font-family: Rockwell;
 }
 
-@media only screen and (max-device-width: 420px) {
-    .container {
-        flex-direction: column;
-    }
-
-    * {
-        font-size: 36px;
-    }
-
-    .login-container,
-    .logo {
-        width: 100%;
-    }
-
-    .login-form {
-        width: 80%;
-        margin: auto;
-    }
-
-    .login-button {
-        font-size: 1em;
-    }
-}
-
 .base-container {
     display: flex;
     align-items: center;
@@ -103,7 +80,7 @@ input {
 
 nav {
     width: 15vw;
-    min-width: 16em;
+    min-width: 10em;
     height: 100%;
     background-color: #87CEFA;
     border-right: 1px solid #87CEFA;
@@ -326,4 +303,58 @@ tr:nth-of-type(odd) td {
     border-radius: 1em;
     box-shadow: 0 0 0.2em red;
     outline: none;
+}
+
+@media only screen and (max-device-width: 420px) {
+    .container {
+        flex-direction: column;
+    }
+
+    * {
+        font-size: 16px;
+    }
+
+    .login-page-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+    }
+
+    .logo {
+        width: 60%;
+        height: 50%;
+    }
+
+    .login-button {
+        font-size: 1em;
+    }
+
+    .main-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .side-bar{
+        border-left: none;
+    }
+
+    .div-input{
+        margin: 5em 0;
+    }
+
+    nav {
+        width: 30vw;
+    }
+
+    .workers-lists {
+        height: auto;
+        margin: 5em 0;
+    }
+
+    .workers-forms {
+        height: auto;
+    }
 }
